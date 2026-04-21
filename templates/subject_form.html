@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ 'Edit' if subject else 'New' }} Subject</h2>
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input name="name" class="form-control" value="{{ subject.name if subject else '' }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea name="description" class="form-control">{{ subject.description if subject else '' }}</textarea>
+    </div>
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-link" href="{{ url_for('subjects_list') }}">Cancel</a>
+  </form>
+{% endblock %}

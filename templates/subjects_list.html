@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Subjects</h2>
+    <a href="{{ url_for('subject_create') }}" class="btn btn-primary">New Subject</a>
+  </div>
+
+  {% if subjects %}
+    <table class="table table-striped">
+      <thead><tr><th>Name</th><th>Description</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for s in subjects %}
+          <tr>
+            <td>{{ s.name }}</td>
+            <td>{{ s.description or '' }}</td>
+            <td>
+              <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('subject_edit', subject_id=s.id) }}">Edit</a>
+              <form method="post" action="{{ url_for('subject_delete', subject_id=s.id) }}" style="display:inline" onsubmit="return confirm('Delete subject?');">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-secondary">No subjects yet.</div>
+  {% endif %}
+{% endblock %}

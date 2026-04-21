@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h1>Welcome to Scholar</h1>
+      <p class="text-muted">Your personal study manager.</p>
+    </div>
+    <div>
+      <a class="btn btn-outline-primary" href="{{ url_for('subjects_list') }}">Manage Subjects</a>
+    </div>
+  </div>
+
+  <h3>Your Subjects</h3>
+  {% if subjects %}
+    <div class="list-group">
+      {% for s in subjects %}
+        <div class="list-group-item">
+          <strong>{{ s.name }}</strong>
+          <div class="small text-muted">{{ s.description or '' }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-secondary">No subjects yet. <a href="{{ url_for('subject_create') }}">Create one</a>.</div>
+  {% endif %}
+{% endblock %}
